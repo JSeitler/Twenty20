@@ -1,89 +1,99 @@
 # Twenty20
-How to implement the 20-20-20 rule on your laptop device using a USB or other plugable devices to trigger the Twenty20 code that beeps every 20 minutes, twice at the start of the 20 seconds and three times at the end.
 
+How to implement the 20-20-20 rule on your laptop device using a USB or other plugable devices to trigger the Twenty20 code that beeps every 20 minutes, twice at the start of the 20 seconds and three times at the end.
 
 The idea I implemented is that any time you have a USB memory stick in your laptop, it with trigger an event and run the code automatically. It will give an initial beep so you know the timer has started, and then will function as required.
 
-
 Complete set up as follows:
 
-1. Identify USB hardware ID
+---
 
-input the following code into PowerShell
+## **1. Identify USB Hardware ID**
 
-- to open PowerShell, press windows and type Powershell to find
+Input the following code into PowerShell:
+
+*(To open PowerShell, press Windows and type PowerShell to find)*
 
 ```powershell
 Get-PnpDevice -Class USB | Where-Object { $_.FriendlyName -like "*Mass Storage*" -or $_.FriendlyName -like "*Flash*" } | Select-Object FriendlyName, InstanceId
 ```
 
-2. Save Code
+---
 
-Create a Folder `C:\twenty20`
-save file into this folder
+## **2. Save Code**
 
-3. Run USB event log
+Create a folder `C:\twenty20`  
+Save file into this folder.
 
-press Window and X at the same time and run
+---
+
+## **3. Run USB Event Log**
+
+Press **Windows** and **X** at the same time and run:
 
 ```cmd
 wevtutil sl "Microsoft-Windows-DriverFrameworks-UserMode/Operational" /e:true
 ```
 
-to enable device arrival events
+to enable device arrival events.
 
-4. Task Schedule
+---
 
-i. press Window and R at the same time, typing taskschd.msc and press Enter 
-this opens the schedule window
+## **4. Task Schedule**
+
+### **i. Open Task Scheduler**
+Press **Windows** and **R** at the same time, type `taskschd.msc`, and press **Enter**.  
+This opens the schedule window.
 
 ![Taskschd](Taskschd.png)
 
-ii. create task
+### **ii. Create Task**
 
 ![createtask](createtask.png)
 
-iii. General: title twenty20_auto
-and to only run when user logged on
+### **iii. General Tab**
+- **Title:** `twenty20_auto`  
+- Only run when user logged on  
 
 ![general](general.png)
 
-iv. triggers:
+### **iv. Triggers Tab**
 
 ![triggers_new](triggers_new.png)
 
-click new
-begin task on event
-log: Microsoft-Windows-DriverFrameworks-UserMode/Operational
-source: DriverFrameworks-UserMode
-Event ID: 2003
+- Click **New**
+- Begin task: **On an event**
+- **Log:** `Microsoft-Windows-DriverFrameworks-UserMode/Operational`
+- **Source:** `DriverFrameworks-UserMode`
+- **Event ID:** `2003`
 
 ![on_event](on_event.png)
 
-v. actions tab
+### **v. Actions Tab**
 
 ![actions_new](actions_new.png)
 
-type in powershell.exe
-and in arguments: 
+- Type in: `powershell.exe`
+- Arguments:
 ```text
 -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\twenty20\twenty20.ps1"
 ```
 
-vi. Conditions
+### **vi. Conditions Tab**
 
 ![uncheck](uncheck.png)
 
-uncheck boxes
-and set to do not start new instants
+- Uncheck boxes
+- Set to do not start new instances
 
+---
 
-vii. verification
+## **5. Verification**
 
-type into powershell
+Type into PowerShell:
 
 ```powershell
 Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe'" | Select-Object ProcessId, CommandLine
 ```
 
-to check it has worked
+to check it has worked.

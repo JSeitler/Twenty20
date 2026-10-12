@@ -8,7 +8,7 @@ Complete set up as follows:
 
 ---
 
-## **1. Identify USB Hardware ID**
+### **1. Identify USB Hardware ID**
 
 Input the following code into PowerShell:
 
@@ -20,14 +20,14 @@ Get-PnpDevice -Class USB | Where-Object { $_.FriendlyName -like "*Mass Storage*"
 
 ---
 
-## **2. Save Code**
+### **2. Save Code**
 
 Create a folder `C:\twenty20`  
 Save file into this folder.
 
 ---
 
-## **3. Run USB Event Log**
+### **3. Run USB Event Log**
 
 Press **Windows** and **X** at the same time and run:
 
@@ -39,25 +39,25 @@ to enable device arrival events.
 
 ---
 
-## **4. Task Schedule**
+### **4. Task Schedule**
 
-### **i. Open Task Scheduler**
+#### **i. Open Task Scheduler**
 Press **Windows** and **R** at the same time, type `taskschd.msc`, and press **Enter**.  
 This opens the schedule window.
 
 ![Taskschd](Taskschd.png)
 
-### **ii. Create Task**
+#### **ii. Create Task**
 
 ![createtask](createtask.png)
 
-### **iii. General Tab**
+#### **iii. General Tab**
 - **Title:** `twenty20_auto`  
 - Only run when user logged on  
 
 ![general](general.png)
 
-### **iv. Triggers Tab**
+#### **iv. Triggers Tab**
 
 ![triggers_new](triggers_new.png)
 
@@ -69,7 +69,7 @@ This opens the schedule window.
 
 ![on_event](on_event.png)
 
-### **v. Actions Tab**
+#### **v. Actions Tab**
 
 ![actions_new](actions_new.png)
 
@@ -79,7 +79,7 @@ This opens the schedule window.
 -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\twenty20\twenty20.ps1"
 ```
 
-### **vi. Conditions Tab**
+#### **vi. Conditions Tab**
 
 ![uncheck](uncheck.png)
 
@@ -88,7 +88,7 @@ This opens the schedule window.
 
 ---
 
-## **5. Verification**
+### **5. Verification**
 
 Type into PowerShell:
 

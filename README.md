@@ -17,6 +17,7 @@ Input the following code into PowerShell:
 ```powershell
 Get-PnpDevice -Class USB | Where-Object { $_.FriendlyName -like "*Mass Storage*" -or $_.FriendlyName -like "*Flash*" } | Select-Object FriendlyName, InstanceId
 ```
+![usb_id](usb_id.png)
 
 ---
 

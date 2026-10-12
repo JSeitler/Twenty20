@@ -30,9 +30,9 @@ Save file into this folder.
 ---
 ### **3. Update Code**
 
-Open the code
-Replace your USB id into the top line of the code
-Replacing the XXXX and YYYY with the numbers from USB
+Open the code  
+Replace your USB id into the top line of the code  
+Replacing the XXXX and YYYY with the numbers from USB  
 
 ![code_usb](code_usb.png)
 

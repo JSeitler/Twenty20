@@ -26,9 +26,19 @@ Get-PnpDevice -Class USB | Where-Object { $_.FriendlyName -like "*Mass Storage*"
 Create a folder `C:\twenty20`  
 Save file into this folder.
 
+
+---
+### **3. Update Code**
+
+Open the code
+Replace your USB id into the top line of the code
+Replacing the XXXX and YYYY with the numbers from USB
+
+![code_usb](code_usb.png)
+
 ---
 
-### **3. Run USB Event Log**
+### **4. Run USB Event Log**
 
 Press **Windows** and **X** at the same time and run:
 

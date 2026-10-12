@@ -45,7 +45,7 @@ to enable device arrival events.
 Press **Windows** and **R** at the same time, type `taskschd.msc`, and press **Enter**.  
 This opens the schedule window.
 
-![Taskschd](Taskschd.png)
+![Taskschd](taskschd.png)
 
 #### **ii. Create Task**
 

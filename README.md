@@ -13,18 +13,22 @@ input the following code into PowerShell
 
 - to open PowerShell, press windows and type Powershell to find
 
+```powershell
 Get-PnpDevice -Class USB | Where-Object { $_.FriendlyName -like "*Mass Storage*" -or $_.FriendlyName -like "*Flash*" } | Select-Object FriendlyName, InstanceId
+```
 
 2. Save Code
 
-Create a Folder C:\twenty20
+Create a Folder `C:\twenty20`
 save file into this folder
 
 3. Run USB event log
 
 press Window and X at the same time and run
 
+```cmd
 wevtutil sl "Microsoft-Windows-DriverFrameworks-UserMode/Operational" /e:true
+```
 
 to enable device arrival events
 
@@ -33,18 +37,20 @@ to enable device arrival events
 i. press Window and R at the same time, typing taskschd.msc and press Enter 
 this opens the schedule window
 
-// Taskschd.png
+![Taskschd](Taskschd.png)
 
 ii. create task
 
-// createtask.png
+![createtask](createtask.png)
 
 iii. General: title twenty20_auto
 and to only run when user logged on
- //general.png
+
+![general](general.png)
 
 iv. triggers:
-// triggers_new
+
+![triggers_new](triggers_new.png)
 
 click new
 begin task on event
@@ -52,15 +58,21 @@ log: Microsoft-Windows-DriverFrameworks-UserMode/Operational
 source: DriverFrameworks-UserMode
 Event ID: 2003
 
-// on_event
+![on_event](on_event.png)
 
 v. actions tab
-// actions_new
-type in powershell.exe
-and in arguments: -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\twenty20\twenty20.ps1"
 
-vi. COnditions
-// uncheck.png
+![actions_new](actions_new.png)
+
+type in powershell.exe
+and in arguments: 
+```text
+-WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\twenty20\twenty20.ps1"
+```
+
+vi. Conditions
+
+![uncheck](uncheck.png)
 
 uncheck boxes
 and set to do not start new instants
@@ -70,6 +82,8 @@ vii. verification
 
 type into powershell
 
+```powershell
 Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe'" | Select-Object ProcessId, CommandLine
+```
 
 to check it has worked
